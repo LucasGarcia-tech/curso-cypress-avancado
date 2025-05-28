@@ -75,7 +75,7 @@ describe('Hacker Stories', () => {
         .clear()
     })
 
-    it('types and hits ENTER', () => {
+    it.only('types and hits ENTER', () => {
   cy.get('#search')
     .type(`${newTerm}{enter}`)
 
