@@ -22,4 +22,10 @@ jobs:
       - name: Install dependencies
         run: npm ci --legacy-peer-deps
 
-      - name: Run Cypress tests with Pe
+      # ⚠️ Esta etapa estava com erro antes. 'npx percy install' não é necessário com o Percy CLI.
+      # Você pode REMOVER essa etapa ou substituí-la por um comentário.
+      # Percy CLI não tem o comando `install`.
+      # - name: Install Percy
+      #   run: npx percy install
+
+      - name: Run Cypress tes
