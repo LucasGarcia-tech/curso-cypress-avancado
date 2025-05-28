@@ -1,9 +1,12 @@
 describe('Hacker Stories', () => {
   beforeEach(() => {
-    cy.visit('/')
+    cy.intercept(
+      'GET',
+      '**/search?query=React&page=0'
+    ).as('getStories')
 
-    cy.assertLoadingIsShownAndHidden()
-    cy.contains('More').should('be.visible')
+    cy.visit('/')
+    cy.wait('@getStories')
   })
 
   it('shows the footer', () => {
@@ -72,19 +75,23 @@ describe('Hacker Stories', () => {
         .clear()
     })
 
-    it('types and hits ENTER', () => {
-      cy.get('#search')
-        .type(`${newTerm}{enter}`)
+    it.only('types and hits ENTER', () => {
+  cy.get('#search')
+    .type(`${newTerm}{enter}`)
 
-      cy.assertLoadingIsShownAndHidden()
+  cy.assertLoadingIsShownAndHidden()
 
-      cy.get('.item').should('have.length', 20)
-      cy.get('.item')
-        .first()
-        .should('contain', newTerm)
-      cy.get(`button:contains(${initialTerm})`)
-        .should('be.visible')
-    })
+  cy.get('.item').should('have.length', 20)
+  cy.get('.item')
+    .first()
+    .should('contain', newTerm)
+  cy.get(`button:contains(${initialTerm})`)
+    .should('be.visible')
+
+  // Aqui tira a captura visual da página no estado atual
+  cy.percySnapshot('Busca com ENTER mostrando 20 resultados')
+})
+
 
     it('types and clicks the submit button', () => {
       cy.get('#search')

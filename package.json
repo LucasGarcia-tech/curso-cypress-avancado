@@ -32,6 +32,8 @@
   "license": "MIT",
   "homepage": "https://github.com/wlsf82/curso-cypress-avancado#readme",
   "devDependencies": {
+    "@percy/cli": "^1.30.11",
+    "@percy/cypress": "^3.1.6",
     "cypress": "^14.0.3",
     "cypress-localstorage-commands": "^1.4.1",
     "faker": "^5.4.0",
